@@ -51,7 +51,7 @@
 
 ---
 
-## Step 0 — Check your setup (3–4 min)
+## Step 0 — Check your setup
 
 1. Open `00_check_env.R`.
 2. Select all (**Ctrl/Cmd‑A**) → Run (**Ctrl/Cmd‑Enter**).
@@ -62,7 +62,7 @@ What you should see:
 
 ---
 
-## Step 1 — Hello, gEcon (toy AR(1), 7–8 min)
+## Step 1 — Hello, gEcon (toy AR(1))
 
 **Purpose:** practice the pipeline without macro.
 
@@ -73,7 +73,7 @@ What you should see:
 
 ---
 
-## Step 2 — RBC from data (15–20 min, pairs)
+## Step 2 — RBC from data
 
 1. Open `02_rbc_setup.R` and run it line‑by‑line. It will:
    - Copy the official `rbc.gcn` into this folder (from the package examples).
@@ -85,7 +85,7 @@ What you should see:
 
 ---
 
-## Step 3A — Tiny edit: add a **preference shock** (10–12 min)
+## Step 3A — Tiny edit: add a **preference shock**
 
 1. Open `04_extend_prefshock.R` and follow the TODOs inside:
    - Multiply utility by `Xi[]` in `rbc.gcn`.
@@ -140,7 +140,7 @@ G[ss] = gY * Y[ss];
 
 ---
 
-## Step 4 — Reflection (3 min)
+## Step 4 — Reflection
 
 Open `05_reflection.Rmd` and write **two sentences**:
 
