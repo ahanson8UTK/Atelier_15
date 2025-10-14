@@ -1,0 +1,10 @@
+---
+title: "ECON 413 — gEcon Atelier Reflection"
+output: html_document
+---
+
+**Two sentences — copy/paste, then replace blanks:**
+
+1. *Evidence:* With α calibrated to the average **labor share** and δ implied by **I/Y**, my model’s IRFs show **[pattern]**, especially for **[variable(s)]** over **[horizon]**.
+
+2. *Limits:* I’d be convinced the model is missing **[mechanism]** because the data show **[fact/contrast]** while the model insists **[model pattern]**.
