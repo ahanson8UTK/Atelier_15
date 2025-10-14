@@ -1,49 +1,75 @@
-# Atelier_15
-
 # ECON 413 — gEcon Atelier (Local RStudio)
 
-**Goal today (70–75 min):**  
-1) Learn the `.gcn → make_model → solve → IRF` pipeline on a tiny toy model (no macro).  
-2) Copy the official `rbc.gcn`, calibrate α and δ from data, solve, check BK, and plot IRFs.  
-3) Make one safe edit (preference shock) and compare IRFs.  
+**Today’s goal (70–75 min):**
+1) Learn the `.gcn → make_model → solve → IRF` pipeline on a tiny toy model (no macro).
+2) Copy the official `rbc.gcn`, calibrate α and δ from data, solve, check BK, and plot IRFs.
+3) Make one safe edit (preference shock) and compare IRFs.
 4) Write a two‑sentence reflection and commit.
 
 ---
 
-## Before class
+## START HERE — Get the project into RStudio (choose ONE)
 
-- Install **R (≥4.2)** and **RStudio**.  
-- Windows: if prompted later, install **Rtools**. macOS: install **Xcode Command Line Tools** (`xcode-select --install`).
+> ✅ **Recommended (most reliable): Option A**  
+> ❌ **Do NOT** double‑click random `.R` files. Always open the **project** first.
+
+### Option A — Clone in RStudio (uses Git)
+1. Open **RStudio**.
+2. Go to **File → New Project → Version Control → Git**.
+3. In **Repository URL**, paste your GitHub Classroom link:  
+   `https://github.com/<your-classroom-org>/<this-assignment-repo>`
+4. Choose a folder on your computer (e.g., `Documents/ECON413`).
+5. Click **Create Project**.  
+   RStudio will clone the repo and open `ECON413_gEcon_Atelier.Rproj`.
+
+**You did it if:** you see the Files pane listing `00_check_env.R`, `01_hello_ar1.gcn`, etc., and the RStudio title bar ends with `ECON413_gEcon_Atelier`.
 
 ---
 
-## Open this project *correctly*
+### Option B — Download ZIP (no Git required)
+1. On the GitHub repo page, click the green **Code** button → **Download ZIP**.
+2. Unzip the file.
+3. Double‑click `ECON413_gEcon_Atelier.Rproj` inside the unzipped folder.  
+   (If RStudio is closed, this will launch it and open the project.)
 
-1. Launch **RStudio**.  
-2. **File → Open Project…** and select `ECON413_gEcon_Atelier.Rproj`.  
-3. Keep the **Console** visible.
+**You did it if:** RStudio opens in that folder and the Files pane shows the project files.
+
+---
+
+### Option C — GitHub Desktop
+1. In **GitHub Desktop**, click **File → Clone repository…** and paste your Classroom URL.
+2. After cloning, click **Open in RStudio**, or double‑click `ECON413_gEcon_Atelier.Rproj` in the cloned folder.
+
+---
+
+### Quick checks (applies to A/B/C)
+- In RStudio: **Tools → Global Options → Git/SVN**  
+  - If Git is *not* detected and you want to use Option A or C:
+    - **Windows:** install “Git for Windows”.  
+    - **macOS:** run `xcode-select --install` once if prompted.
+- If GitHub asks for a password, use your **personal access token** (PAT).
 
 ---
 
 ## Step 0 — Check your setup (3–4 min)
 
-1. Open `00_check_env.R`.  
-2. Select all (Ctrl/Cmd‑A) → Run (Ctrl/Cmd‑Enter).  
-   - It installs/loads packages and verifies access to gEcon examples.  
-   - Look for: **“✅ READY — gEcon examples found at: …”**  
-   - If you see a **❌** message, follow the on‑screen fix and re‑run the file.
+1. Open `00_check_env.R`.
+2. Select all (**Ctrl/Cmd‑A**) → Run (**Ctrl/Cmd‑Enter**).
+
+What you should see:
+- A line like `✅ READY — gEcon examples found at: ...`
+- If you see a red ❌ message, follow the on‑screen fix (Windows: install **Rtools**; macOS: run `xcode-select --install`) and re‑run the file.
 
 ---
 
 ## Step 1 — Hello, gEcon (toy AR(1), 7–8 min)
 
-Purpose: practice the pipeline **without macro**.
+**Purpose:** practice the pipeline without macro.
 
-1. Open `01_hello_ar1.gcn` (8 lines; defines an AR(1) with a shock).
-2. Open `01_hello_ar1.R` and run it line‑by‑line.  
-   - You should see an IRF plot for `X`.
+1. Open `01_hello_ar1.gcn` (8 lines; one AR(1) with a shock).
+2. Open `01_hello_ar1.R` and run it line‑by‑line.
 
-**You did it if:** a plot appears and no errors show.
+**Done when:** an IRF plot for `X` appears and no errors are printed.
 
 ---
 
@@ -52,48 +78,68 @@ Purpose: practice the pipeline **without macro**.
 1. Open `02_rbc_setup.R` and run it line‑by‑line. It will:
    - Copy the official `rbc.gcn` into this folder (from the package examples).
    - Pull U.S. data (2000–2019) for GDP, Investment, and Labor Share.
-   - Calibrate **α** from labor share and back out **δ** from the mean **I/Y** given β=0.99.
-   - Solve the steady state (calibration **off** so your α is respected), run the perturbation, check BK, and plot IRFs for {Y, C, I, K_s, W}.
+   - Calibrate **α** from labor share; back out **δ** from the mean **I/Y** given β = 0.99.
+   - Solve the steady state (with your α), run the perturbation, check BK, and plot IRFs for {Y, C, I, K_s, W}.
 
-**You did it if:**  
-- The steady state solves, `check_bk(rbc)` prints a OK summary, and IRFs plot.  
-- If BK fails, re‑run after reading the printed hint.
+**Done when:** steady state solves, `check_bk(rbc)` returns OK info, and IRFs plot.
 
 ---
 
 ## Step 3 — Tiny edit: add a **preference shock** (10–12 min)
 
-1. Open `04_extend_prefshock.R` and follow the TODOs inside:  
-   - Multiply utility by `Xi[]` in `rbc.gcn`.  
-   - Add block `PREF` with AR(1) for `Xi[]` and a shock `epsilon_Xi[]`.  
-   - Re‑solve, set a two‑shock covariance, and plot IRFs for {Y, C, I}.
+1. Open `04_extend_prefshock.R` and follow the TODOs inside:
+   - Multiply utility by `Xi[]` in `rbc.gcn`.
+   - Add a `PREF` block with AR(1) for `Xi[]` and a shock `epsilon_Xi[]`.
+   - Re‑solve; set a two‑shock covariance; plot IRFs for {Y, C, I}.
+2. Compare IRFs with and without the preference shock.
 
-**You did it if:** the new IRFs plot and look different from the tech‑shock IRFs.
+**Done when:** new IRFs plot and differ from the tech‑shock IRFs.
 
 ---
 
 ## Step 4 — Reflection (3 min)
 
-Open `05_reflection.Rmd` and write exactly **two sentences**:
-1) Evidence: “With α from labor share and δ from I/Y, my model’s IRFs show …”  
-2) Limits: “I’d be convinced we’re missing … because the data show … but the model insists …”
+Open `05_reflection.Rmd` and write **two sentences**:
+
+1. *Evidence:* With α from labor share and δ implied by I/Y, my model’s IRFs show **[pattern]**, especially **[variable(s)]** over **[horizon]**.  
+2. *Limits:* I’d be convinced the model is missing **[mechanism]** because the data show **[fact]** while the model insists **[model pattern]**.
 
 Knit (optional), then **Commit** with message: `irfs + reflection`.
 
 ---
 
-## Troubleshooting hints
+## Troubleshooting (read top to bottom)
 
-- **Package install fails (Windows)**: install **Rtools**; re‑run Step 0.  
-- **Package install fails (macOS)**: run `xcode-select --install`; re‑run Step 0.  
-- **Steady state fails**: re‑run after `initval_var()` guesses (see inline comments).  
-- **BK error**: ensure you called `solve_pert()` before `check_bk()`.  
-- **No IRF plot**: confirm `set_shock_cov_mat()` was called; check shock names.
+- **Package install fails (Windows):** install **Rtools** (CRAN) and re‑run Step 0.  
+- **Package install fails (macOS):** run `xcode-select --install` and re‑run Step 0.  
+- **Steady state fails:** re‑run after Step 2 lines; check any printed equation residuals.  
+- **BK error:** ensure you ran `solve_pert()` before `check_bk()`; review timing of any new variables.  
+- **No IRF plot:** confirm you called `set_shock_cov_mat()`; check the **shock names** match the model.
 
 ---
 
-## What to turn in (automatically handled by Git commit)
+## FAQ
 
-- Your edited `rbc.gcn` (preference shock), plus any scripts you touched.  
-- Your `05_reflection.Rmd`.
+**Q: Can I just open `02_rbc_setup.R` by double‑clicking it?**  
+A: Please **don’t**. Always open the **`.Rproj`** first so all paths are correct.
 
+**Q: I don’t have Git. Can I still do the assignment?**  
+A: Yes—use **Option B (ZIP)** above.
+
+**Q: Do I need a GitHub PAT?**  
+A: Only if you clone via HTTPS and GitHub prompts for a password. The PAT goes in the password box.
+
+---
+
+## (Optional) Power‑user one‑liner: clone via `usethis`
+
+```r
+# ---- packages: install if missing, then load quietly ----
+pkgs <- c("usethis")
+to_install <- pkgs[!sapply(pkgs, requireNamespace, quietly = TRUE)]
+if (length(to_install) > 0) install.packages(to_install)
+invisible(lapply(pkgs, library, character.only = TRUE))
+
+# Replace with your Classroom repo URL and desired folder:
+usethis::create_from_github("https://github.com/<your-classroom-org>/<this-assignment-repo>",
+                            destdir = "~/repos")
