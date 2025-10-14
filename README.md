@@ -95,49 +95,6 @@ What you should see:
 
 **Done when:** new IRFs plot and differ from the tech‑shock IRFs.
 
-### 3B — Fiscal shock with balanced budget
-> You’ll add **government spending `G`** and **lump‑sum taxes `T`** so the budget is **balanced each period** (`T = G`), then IRF a **G‑shock**.
-
-**Edit `rbc.gcn` in two places (copy/paste exactly):**
-
-1) **Household budget constraint** (inside `block CONSUMER { constraints { ... } }`)  
-**Replace** this line:
-I[] + C[] = pi[] + r[] * K_s[-1] + W[] * L_s[];
-**With** this:
-I[] + C[] + T[] = pi[] + r[] * K_s[-1] + W[] * L_s[];
-
-
-2) **Add a new block at the very end of the file:**
-block FISCAL {
-identities {
-G[] = exp(rho_G * log(G[-1]) + epsilon_G[]);
-T[] = G[]; # balanced budget (lump-sum)
-};
-shocks { epsilon_G[]; };
-calibration {
-rho_G = 0.9; # persistence of G
-gY = 0.20; # baseline G/Y share (will be updated in 3C)
-G[ss] = gY * Y[ss];
-};
-};
-
-**Run `04b_extend_fiscalshock.R`:** it parses your edited model, solves it, sets both shocks (`epsilon_Z`, `epsilon_G`), and plots IRFs for {G, T, Y, C, I, L_s, W, r}.  
-*Tip:* When requesting IRFs for taxes, pass `"T"` as a string—bare `T` is `TRUE` in R.
-
----
-
-### 3C — Calibrate government share from data — *new, optional stretch*
-> Estimate \( gY \equiv \overline{G/Y} \) from data, set it in the model, and compare the IRFs.
-
-1. Ensure you already did **3B** (so `rbc.gcn` has the fiscal block).  
-2. Run `04c_fiscalshock_calibrate_from_data.R`. It will:
-   - Download **GCEC1** and **GDPC1** (2000–2019) from FRED.  
-   - Compute \( gY \approx \text{mean}(G/Y) \).  
-   - Set `gY` via `set_free_par(rbc, list(gY = gY_hat))`.  
-   - Re‑solve and plot IRFs for {G, T, Y, C, I, L_s, W, r}.
-
-**Done when:** the script prints your estimated `gY` (e.g., `≈ 0.200`) and generates IRFs.
-
 ---
 
 ## Step 4 — Reflection
@@ -149,16 +106,10 @@ Open `05_reflection.Rmd` and write **two sentences**:
 
 **Plus: answer two micro‑prompts (one from A and one from B). Keep each answer ≤ 25 words.**
 
-**A. Preference shock (choose ONE)**
+**A. Preference shock**
 - A1. *Margins:* Did the **preference shock** mostly move **consumption–saving** or **labor–leisure**? Point to the equation it touched (Euler vs. intratemporal FOC).  
 - A2. *Signs & humps:* After a **+Ξ** shock, what happens on impact to {C, I, Y, L_s}? Which has the most pronounced hump, and why?  
 - A3. *Persistence:* Change **ρ_Ξ** from 0.5 → 0.95. How do **amplitude** and **duration** of C’s IRF change?
-
-**B. Fiscal shock (choose ONE)**
-- B1. *Crowding‑out:* On impact of a **+G** shock with **T = G** (lump‑sum), which falls more—**C** or **I**—and what’s the mechanism?  
-- B2. *Resource check:* Visually, does **ΔY ≈ ΔC + ΔI + ΔG** hold for the first 8 quarters? If not, what likely went wrong in your edit?  
-- B3. *Wealth effect:* Did **L_s** rise or fall on impact after **+G**? Explain in one phrase using the wealth effect.  
-- B4. *Calibration shift:* After setting **gY** from data (Step 3C), how did the **peak ΔY** change compared with **gY = 0.20**?
 
 Knit (optional), then **Commit** with message: `irfs + reflection`.
 
