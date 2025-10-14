@@ -11,7 +11,7 @@ output: html_document
 
 ---
 
-## Micro‑prompts (answer TWO total: ONE from A and ONE from B). ≤ 25 words each.
+## Micro‑prompts ≤ 25 words each.
 
 ### A. Preference shock — pick one
 - **A1 – Margins.** Did the **preference shock** mostly move **consumption–saving** or **labor–leisure**? Name the equation it shifts (Euler vs. intratemporal FOC).  
@@ -21,19 +21,6 @@ output: html_document
   **Answer:** _[≤25 words]_
 
 - **A3 – Persistence.** Change **ρ_Ξ** from 0.5 → 0.95. Describe how **amplitude** and **duration** of **C**’s IRF change.  
-  **Answer:** _[≤25 words]_
-
-### B. Fiscal shock — pick one
-- **B1 – Crowding‑out.** On impact of **+G** with **T = G** (lump‑sum), which falls more—**C** or **I**—and what mechanism explains it?  
-  **Answer:** _[≤25 words]_
-
-- **B2 – Resource check.** Does **ΔY ≈ ΔC + ΔI + ΔG** hold (first 8 quarters)? If not, what likely went wrong in your edit?  
-  **Answer:** _[≤25 words]_
-
-- **B3 – Wealth effect.** Did **L_s** rise or fall on impact after **+G**? Tie it to the wealth effect of lump‑sum taxes.  
-  **Answer:** _[≤25 words]_
-
-- **B4 – Calibration shift.** After setting **gY** from data (Step 3C), how did the **peak ΔY** change vs. **gY = 0.20**?  
   **Answer:** _[≤25 words]_
 
 ---
