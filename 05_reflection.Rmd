@@ -26,5 +26,4 @@ output: html_document
 ---
 
 ## (Optional) One‑liner sanity checks for your future self
-- Turning **ρ_Ξ → 0** kills the preference IRF quickly; turning **gY → 0** eliminates fiscal effects.  
-- If **“T”** doesn’t plot, remember it must be in quotes: `"T"` (bare `T` is `TRUE` in R).
+- Turning **ρ_Ξ → 0** kills the preference IRF quickly
