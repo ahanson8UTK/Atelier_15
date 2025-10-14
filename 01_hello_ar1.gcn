@@ -1,0 +1,12 @@
+# ############################################################################
+# Hello, gEcon: one-variable AR(1) process (toy example)
+# ############################################################################
+options { output logfile = TRUE; };
+
+block TOY {
+  identities {
+    X[] = rho * X[-1] + eps_X[];
+  };
+  shocks { eps_X[]; };
+  calibration { rho = 0.8; };
+};
