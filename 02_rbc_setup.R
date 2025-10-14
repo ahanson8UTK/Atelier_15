@@ -17,20 +17,30 @@ rbc <- make_model("rbc.gcn")  # parses & builds gecon_model. :contentReference[o
 # 2) Data (2000–2019): real GDP, real private investment, labor share
 getSymbols(c("GDPC1","GPDIC1","LABSHPUSA156NRUG"), src = "FRED", auto.assign = TRUE)
 
+# Merge on the union of dates; labor share is annual, others quarterly
+X <- merge(GDPC1, GPDIC1, LABSHPUSA156NRUG, join = "left")
+
+# Upsample annual labor share to quarterly by carrying its yearly value forward
+X$LABSHPUSA156NRUG <- zoo::na.locf(X$LABSHPUSA156NRUG, fromLast = TRUE)
+
+# Restrict to 2000–2019 window
+X <- window(X, start = as.Date("2000-01-01"), end = as.Date("2019-12-31"))
+
+# Build tidy table
 fred <- tibble(
-  date   = zoo::index(GDPC1),
-  y      = as.numeric(GDPC1),
-  i      = as.numeric(GPDIC1[zoo::index(GDPC1)]),
-  lshare = as.numeric(LABSHPUSA156NRUG[zoo::index(GDPC1)])
+  date   = zoo::index(X),
+  y      = as.numeric(X$GDPC1),
+  i      = as.numeric(X$GPDIC1),
+  lshare = as.numeric(X$LABSHPUSA156NRUG)
 ) |>
-  filter(date >= as.Date("2000-01-01"), date <= as.Date("2019-12-31")) |>
   mutate(qtr = yearquarter(date)) |>
   as_tsibble(index = qtr)
 
-IY_target  <- mean(fred$i/fred$y, na.rm = TRUE)     # I/Y
-labshare   <- mean(fred$lshare, na.rm = TRUE)/100   # labor share in [0,1]
-alpha_hat  <- 1 - labshare                          # capital share α
-beta_hat   <- 0.99                                  # quarterly β
+# Targets
+IY_target <- mean(fred$i / fred$y, na.rm = TRUE)
+labshare  <- mean(fred$lshare,     na.rm = TRUE)
+alpha_hat <- 1 - labshare
+beta_hat  <- 0.99
 
 # Back out δ from steady-state I/Y:
 # K/Y = α / (1/β - 1 + δ), and I/Y = δ * (K/Y)
