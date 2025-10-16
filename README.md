@@ -97,6 +97,18 @@ What you should see:
 
 ---
 
+## Step 3B — Tiny edit: add a **fiscal shock**
+
+1. Open `04b_extend_fiscalshock.R` and follow the TODOs inside:
+   - Add tax T[] to household budget constraint in `rbc.gcn`.
+   - Add a `GOVERNMENT` block with AR(1) for `G[]` and a shock `eps_G[]`.
+   - Re‑solve; set a two‑shock covariance; plot IRFs for all endogenous variables.
+2. Compare IRFs across all three different shocks.
+
+**Done when:** new IRFs plot and differ from the tech‑shock and preference-shock IRFs.
+
+---
+
 ## Step 4 — Reflection
 
 Open `05_reflection.Rmd` and write **two sentences**:
