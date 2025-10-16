@@ -13,7 +13,7 @@ output: html_document
 
 ## Micro‑prompts ≤ 25 words each.
 
-### A. Preference shock — pick one
+### A. Preference shock
 - **A1 – Margins.** Did the **preference shock** mostly move **consumption–saving** or **labor–leisure**? Name the equation it shifts (Euler vs. intratemporal FOC).  
   **Answer:** _[≤25 words]_
 
@@ -25,5 +25,49 @@ output: html_document
 
 ---
 
+### B. Compare shocks: preference (Ξ), fiscal (ε_G), and technology (ε_Z)
+
+Use your **composite IRF figure** from `04b_extend_fiscalshock.R` (one panel per shock; same scale).
+
+- **B1 – Impact signs & ranking.** Rank the **impact** responses of **Y, C, I, L_s** across the three shocks; note any sign flips.  
+  **Answer:** _[≤25 words]_
+
+- **B2 – Crowding‑out.** For a **+ε_G** spending shock, which is crowded out more, **C** or **I**? Explain using **wealth vs. substitution** channels.  
+  **Answer:** _[≤25 words]_
+
+- **B3 – Persistence & hump shapes.** Which shock produces the **largest hump** in **I**? Which in **L_s**? Give the propagation mechanism.  
+  **Answer:** _[≤25 words]_
+
+- **B4 – Prices.** Compare **r** and **w** on impact across shocks. Which shock raises **r** the most, and why?  
+  **Answer:** _[≤25 words]_
+
+- **B5 – Output share logic.** Holding α, β, δ fixed, which shock most plausibly explains **short‑run Y** volatility in your calibration? Justify from the IRFs.  
+  **Answer:** _[≤25 words]_
+
+---
+
+### C. Choose one extension (implement, then reflect)
+
+Pick **one** model change, re‑solve, and re‑plot IRFs for **ε_G**. Note your implementation in your repo commit message.
+
+**Option C‑Prod (productive G):** make utility additively separable and add **+ψ · log G[]**. Keep lump‑sum taxes.  
+**Option C‑Tax (distortionary):** replace lump‑sum financing with **T[] = τ_L · w[] · L[]**; use after‑tax wage in the household’s budget.
+
+- **C1 – Your choice & equation.** State which option you chose and write the **one- or two‑line change** (utility term or tax rule).  
+  **Answer:** _[≤25 words]_
+
+- **C2 – Fiscal IRF change.** Under your option, how does **Y**’s response to **+ε_G** differ from the baseline? Name the key channel.  
+  **Answer:** _[≤25 words]_
+
+- **C3 – Moment to target.** Name a data **moment** you’d use to pin down **ψ** or **τ_L**.  
+  **Answer:** _[≤25 words]_
+
+---
+
 ## (Optional) One‑liner sanity checks for your future self
-- Turning **ρ_Ξ → 0** kills the preference IRF quickly
+- Turning **ρ_Ξ → 0** kills the preference IRF quickly.  
+- Setting **ψ = 0** returns the baseline (no productive G).  
+- With **τ_L = 0** and **T[] = G[]**, you’re back to lump‑sum finance.  
+- If **C/Y ≤ 0** at your **G/Y** target, lower **G/Y** or revisit β, δ.
+
+---
