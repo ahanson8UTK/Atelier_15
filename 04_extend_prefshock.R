@@ -15,7 +15,7 @@ invisible(lapply(pkgs, library, character.only = TRUE))
 #    block PREF {
 #      identities { Xi[] = exp(rho_Xi * log(Xi[-1]) + epsilon_Xi[]); };
 #      shocks { epsilon_Xi[]; };
-#      calibration { rho_Xi = 0.9; };
+#      calibration { rho_Xi = 0.5; };
 #    };
 
 # === After saving rbc.gcn, run from here ===
