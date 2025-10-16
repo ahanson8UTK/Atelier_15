@@ -111,17 +111,7 @@ What you should see:
 
 ## Step 4 — Reflection
 
-Open `05_reflection.Rmd` and write **two sentences**:
-
-1. *Evidence:* With α from labor share and δ implied by I/Y, my model’s IRFs show **[pattern]**, especially **[variable(s)]** over **[horizon]**.  
-2. *Limits:* I’d be convinced the model is missing **[mechanism]** because the data show **[fact]** while the model insists **[model pattern]**.
-
-**Plus: answer two micro‑prompts (one from A and one from B). Keep each answer ≤ 25 words.**
-
-**A. Preference shock**
-- A1. *Margins:* Did the **preference shock** mostly move **consumption–saving** or **labor–leisure**? Point to the equation it touched (Euler vs. intratemporal FOC).  
-- A2. *Signs & humps:* After a **+Ξ** shock, what happens on impact to {C, I, Y, L_s}? Which has the most pronounced hump, and why?  
-- A3. *Persistence:* Change **ρ_Ξ** from 0.5 → 0.95. How do **amplitude** and **duration** of C’s IRF change?
+Open `05_reflection.Rmd` and answer the questions there. Follow any instructions they give.
 
 Knit (optional), then **Commit** with message: `irfs + reflection`.
 
